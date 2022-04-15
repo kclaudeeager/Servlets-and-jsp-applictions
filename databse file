@@ -1,0 +1,172 @@
+-- phpMyAdmin SQL Dump
+-- version 4.9.2
+-- https://www.phpmyadmin.net/
+--
+-- Host: 127.0.0.1
+-- Generation Time: Apr 15, 2022 at 05:30 PM
+-- Server version: 10.4.11-MariaDB
+-- PHP Version: 7.4.1
+
+SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+SET AUTOCOMMIT = 0;
+START TRANSACTION;
+SET time_zone = "+00:00";
+
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8mb4 */;
+
+--
+-- Database: `demo`
+--
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `product`
+--
+
+CREATE TABLE `product` (
+  `Pid` int(10) NOT NULL,
+  `PName` varchar(100) NOT NULL,
+  `Pprice` int(10) DEFAULT NULL,
+  `SupplierId` int(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `product`
+--
+
+INSERT INTO `product` (`Pid`, `PName`, `Pprice`, `SupplierId`) VALUES
+(6, 'Computer2', 30000, 1),
+(14, 'Television', 255000, 6),
+(17, 'Books', 200000, 5),
+(18, 'Rice', 170000, 4),
+(19, 'Computeri5', 20000000, 8);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `school`
+--
+
+CREATE TABLE `school` (
+  `school_id` int(11) NOT NULL,
+  `school_name` varchar(100) DEFAULT NULL,
+  `school_address` varchar(100) DEFAULT NULL,
+  `headmaster_id` int(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `school`
+--
+
+INSERT INTO `school` (`school_id`, `school_name`, `school_address`, `headmaster_id`) VALUES
+(3, 'CST', 'Kigali', 4),
+(8, 'CBE', 'Kigali', 7),
+(9, 'ur_cs', 'Kayonza@gmail.com', 6);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `users`
+--
+
+CREATE TABLE `users` (
+  `id` int(3) NOT NULL,
+  `name` varchar(120) NOT NULL,
+  `email` varchar(220) NOT NULL,
+  `country` varchar(120) DEFAULT NULL,
+  `gender` varchar(20) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `users`
+--
+
+INSERT INTO `users` (`id`, `name`, `email`, `country`, `gender`) VALUES
+(1, 'Kwizera', 'claudekwizera003@gmail.com', 'Rwanda', ''),
+(4, 'Ishimwe', 'Bonifaceeww@gmail.com', 'Rwanda', ''),
+(5, 'Karangwa', 'karagwa@gmail.com', 'Rwanda', ''),
+(6, 'Aline', 'aline@gmail.com', 'Burundi', ''),
+(7, 'Yves', 'esdol@gmail.com', 'Tanzania', ''),
+(8, 'Janvier Rutagengwa', 'rutagengwa@gmail.com', 'Rwanda', ''),
+(15, 'NGABONZIZA GERARD', 'ngabogerard@gmail', 'Ghana', ''),
+(17, 'kwizera Claude', 'claudekwizera002@gmail.com', 'Rwanda', 'M'),
+(18, 'Andrew', 'Andrew@gmail.com', 'rwanda', 'M'),
+(20, 'felix', 'felix@gmail.com', 'burundi', 'M'),
+(21, 'placide', 'placide@gmail.com', 'congo', 'M'),
+(22, 'alexis Rukundo', 'Rukundo@gmail.com', 'france', 'f');
+
+--
+-- Indexes for dumped tables
+--
+
+--
+-- Indexes for table `product`
+--
+ALTER TABLE `product`
+  ADD PRIMARY KEY (`Pid`),
+  ADD UNIQUE KEY `product name` (`PName`),
+  ADD KEY `SupplierId` (`SupplierId`),
+  ADD KEY `Pprice` (`Pprice`);
+
+--
+-- Indexes for table `school`
+--
+ALTER TABLE `school`
+  ADD PRIMARY KEY (`school_id`),
+  ADD KEY `headmaster_id` (`headmaster_id`);
+
+--
+-- Indexes for table `users`
+--
+ALTER TABLE `users`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `email` (`email`),
+  ADD UNIQUE KEY `name` (`name`);
+
+--
+-- AUTO_INCREMENT for dumped tables
+--
+
+--
+-- AUTO_INCREMENT for table `product`
+--
+ALTER TABLE `product`
+  MODIFY `Pid` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
+
+--
+-- AUTO_INCREMENT for table `school`
+--
+ALTER TABLE `school`
+  MODIFY `school_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+
+--
+-- AUTO_INCREMENT for table `users`
+--
+ALTER TABLE `users`
+  MODIFY `id` int(3) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
+
+--
+-- Constraints for dumped tables
+--
+
+--
+-- Constraints for table `product`
+--
+ALTER TABLE `product`
+  ADD CONSTRAINT `product_ibfk_1` FOREIGN KEY (`SupplierId`) REFERENCES `users` (`id`);
+
+--
+-- Constraints for table `school`
+--
+ALTER TABLE `school`
+  ADD CONSTRAINT `school_ibfk_1` FOREIGN KEY (`headmaster_id`) REFERENCES `users` (`id`);
+COMMIT;
+
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
